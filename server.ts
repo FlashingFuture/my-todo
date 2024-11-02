@@ -1,6 +1,6 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import http from "http";
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 import next from "next";
 
 const dev = process.env.NODE_ENV !== "production";
@@ -12,10 +12,10 @@ app.prepare().then(() => {
   const httpServer = http.createServer(server);
   const io = new Server(httpServer);
 
-  io.on("connection", (socket) => {
+  io.on("connection", (socket: Socket) => {
     console.log("New client connected");
 
-    socket.on("signal", (data) => {
+    socket.on("signal", (data: RTCSessionDescriptionInit) => {
       socket.broadcast.emit("signal", data);
     });
 
@@ -24,9 +24,9 @@ app.prepare().then(() => {
     });
   });
 
-  server.all("*", (req, res) => handle(req, res));
+  server.all("*", (req: Request, res: Response) => handle(req, res));
 
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 3001;
   httpServer.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });

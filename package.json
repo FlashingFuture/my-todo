@@ -2,19 +2,19 @@
   "name": "my-todo",
   "version": "0.1.0",
   "private": true,
-"scripts": {
-  "dev": "ts-node server.ts",
-  "build": "next build",
-  "start": "NODE_ENV=production ts-node server.ts",
-  "lint": "next lint"
+  "scripts": {
+    "build": "tsc",
+    "dev": "npm run build && concurrently \"next dev\" \"node dist/server.js\"",
+    "start": "NODE_ENV=production node dist/server.js"
   },
-
   "dependencies": {
+    "concurrently": "^9.0.1",
     "express": "^4.21.1",
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
@@ -22,8 +22,10 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/socket.io": "^3.0.1",
+    "@types/socket.io-client": "^1.4.36",
     "eslint": "^8",
     "eslint-config-next": "15.0.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

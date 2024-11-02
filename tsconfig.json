@@ -1,16 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "outDir": "./dist", // 컴파일된 JS 파일을 저장할 폴더
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true,
+    "noEmit": false, // 컴파일된 파일을 출력하도록 설정
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "CommonJS", // 서버 측에서 CommonJS 모듈 형식을 사용
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": true, // 여러 파일 컴파일을 지원
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
@@ -19,9 +24,19 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "server.ts",
+    ".next/types/**/*.ts"
+  ], // server.ts를 포함시킴
+  "exclude": [
+    "node_modules"
+  ]
 }
